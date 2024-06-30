@@ -77,7 +77,7 @@
             <div class="box_shadow">
                 <?php
                 echo "    <h1 style=\"font-weight: 300 !important; margin: 0;\">Timelapse Systems - Archiv</h1>\n";
-                echo "    <h3 style=\"margin: 0; margin-top: 5px; color: #99a6ad !important; font-size: .92857rem; font-weight: 400;\">Bildarchiv des Projektes $pro_nam - Kamera $cam_nam</h3></div>\n";
+                echo "    <h3 style=\"margin: 0; margin-top: 5px; color: #99a6ad !important; font-size: .92857rem; font-weight: 400;\">Fotoarchiv des Projektes $pro_nam - Kamera $cam_nam</h3></div>\n";
 
                 $t = 0;
                 $dir_path = '.';

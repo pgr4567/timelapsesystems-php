@@ -4,6 +4,7 @@
 <head>
     <!-- TODO: Change href back-->
     <link rel="stylesheet" href="./css/styles.css">
+    <title>timelapsesystems - Foto-Übersicht</title>
 </head>
 
 <body>
