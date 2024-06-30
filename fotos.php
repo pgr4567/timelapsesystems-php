@@ -8,56 +8,37 @@
 
 <body>
     <span class="back">
-        <a href="index.php">Kalender &Uuml;bersicht</a>
+        <a href="index.php">Kalender Übersicht</a>
     </span>
     <?php
+    require_once 'utils.php';
     $dir_path = '../';
-    $datum = $_GET['datum'];
-    echo "    <h3>$datum</h3>\n";
-    $datum =  "$datum";
-    $sub_array = scandir($datum, SCANDIR_SORT_DESCENDING);
-    $foto_pos = 0;
-    $one = 1;
-    $no_std = array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-    foreach ($sub_array as $sub_entry) {
-        if (substr($sub_entry, 0, 1) != '.') {
-            $existing_std = 1;
-            $start = substr($sub_entry, 6, -13);
-            $start += 0;
-            for ($i = $start; $i >= 0; $i--) {
-                $std = substr($sub_entry, 6, -13);
-                $std += 0;
-                if ($i == $std) {
-                    $existing_std = 0;
-                    $no_std[$i] = 0;
-                    break;
-                } else {
-                    if ($existing_std == 1) {
-                        $no_std[$i] = 1;
-                    }
-                }
-            }
-        }
+    $UNSAFE_date = $_GET['datum'] ?? null;
+    $sanitized_date = getSafeDateFolder($UNSAFE_date);
+
+    if ($sanitized_date === false) {
+        echo "    <h3>Ungültiges Datum</h3>\n";
+        return;
     }
-    $last = 0;
-    for ($i = 23; $i >= 0; $i--) {
-        if ($no_std[$i] == 0) {
-            echo "    <details>\n";
-            echo "      <summary>Stunde&nbsp;" . $i . "</summary>\n";
+
+    echo "    <h3>" . $sanitized_date . "</h3>\n";
+
+    $image_paths = scandir($sanitized_date, SCANDIR_SORT_DESCENDING);
+    $image_map = array();
+    foreach ($image_paths as $image_path) {
+        if (substr($image_path, 0, 1) == '.') {
+            continue;
         }
-        foreach ($sub_array as $sub_entry) {
-            if (substr($sub_entry, 0, 1) != '.') {
-                if (substr($sub_entry, 6, -13) == $i) {
-                    $foto_pos++;
-                    if ($no_std[$i] == 0) {
-                        echo "        <a class=\"details\" href=\"foto.php?foto=" . $sub_entry . "&datum=" . $datum . "&pos=" . $foto_pos . "\">" . $sub_entry . "</a><br>\n";
-                    }
-                }
-            }
+        $hour = substr($image_path, 6, 2);
+        $image_map[$hour][] = $image_path;
+    }
+    foreach ($image_map as $hour => $images) {
+        echo "    <details>\n";
+        echo "      <summary>Stunde&nbsp;" . $hour . "</summary>\n";
+        foreach ($images as $index => $image) {
+            echo "        <a class=\"details\" href=\"foto.php?datum=" . $sanitized_date . "&hour=" . $hour . "&pos=" . $index . "\">" . $image . "</a><br>\n";
         }
-        if ($no_std[$i] == 0) {
-            echo "    </details>\n";
-        }
+        echo "    </details>\n";
     }
     ?>
 </body>

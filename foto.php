@@ -2,58 +2,69 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="../../cam000/css/styles.css">
+    <!-- TODO: Change href back-->
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
     <?php
-    $foto = $_GET['foto'];
-    $pos = $_GET['pos'];
-    $datum = $_GET['datum'];
-    $dir_path = '../';
+    require_once 'utils.php';
 
-    echo "    <a class=\"back\" href=\"fotos.php?datum=" . $datum . "\">" . "Bilder &Uuml;bersicht" . "</a><br>\n";
-    $std = substr($foto, 6, -13);
-    $min = substr($foto, 9, -10);
-    echo "    <h3>$datum / $std:$min</h3>\n";
-    $datum = "$datum";
-    $sub_array = scandir($datum, SCANDIR_SORT_DESCENDING);
-    $foto_pos = 0;
-    $i = 0;
-    $anzahl_pos = -2;
-    foreach ($sub_array as $sub_entry) {
-        if (substr($sub_entry, 0, 1) != '.') {
-            $i++;
-            if ($pos == $i) {
-                $foto = current($sub_array);
-                if ($pos != 1) {
-                    $next_foto = prev($sub_array);
-                    $next_pos = $pos - 1;
-                    next($sub_array);
-                }
-                $prev_foto = next($sub_array);
-                $prev_pos = $pos + 1;
-                echo "    <div class=\"center\">\n";
-                echo "      <img src=\"" . $datum . "/" . $foto . "\">\n";
-                echo "    </div>\n";
-            }
-            next($sub_array);
-        }
-        $anzahl_pos++;
+    $pos = filter_input(INPUT_GET, 'pos', FILTER_SANITIZE_NUMBER_INT);
+    $hour = filter_input(INPUT_GET, 'hour', FILTER_SANITIZE_NUMBER_INT);
+    $UNSAFE_date = $_GET['datum'] ?? null;
+    $sanitized_date = getSafeDateFolder($UNSAFE_date);
+
+    if ($sanitized_date === false || $pos === null || $hour === null) {
+        echo "    <h3>Ungültige GET Parameter</h3>\n";
+        return;
     }
 
-    if ($pos != $anzahl_pos) {
+    $image_paths = scandir($sanitized_date, SCANDIR_SORT_DESCENDING);
+    $image_map = array();
+    foreach ($image_paths as $image_path) {
+        if (substr($image_path, 0, 1) == '.') {
+            continue;
+        }
+        $current_hour = substr($image_path, 6, 2);
+        $image_map[$current_hour][] = $image_path;
+    }
+
+    if (key_exists($pos, $image_map[$hour])) {
+        $image = $image_map[$hour][$pos];
+        $min = substr($image, 9, 2);
+    } else {
+        echo "    <h3>Ungültige GET Parameter</h3>\n";
+        return;
+    }
+    $prev_image = false;
+    $next_image = false;
+    if (key_exists($pos - 1, $image_map[$hour])) {
+        $next_image = true;
+    }
+    if (key_exists($pos + 1, $image_map[$hour])) {
+        $prev_image = true;
+    }
+
+    echo "    <a class=\"back\" href=\"fotos.php?datum=" . $sanitized_date . "\">" . "Bilder Übersicht" . "</a><br>\n";
+    echo "    <h3>$sanitized_date / $hour:$min</h3>\n";
+
+    echo "    <div class=\"center\">\n";
+    echo "      <img src=\"" . $sanitized_date . "/" . $image . "\">\n";
+    echo "    </div>\n";
+
+    if ($prev_image) {
         echo "    <div class=\"center\">\n";
-        echo "      <a class=\"back\" href=\"foto.php?foto=" . $prev_foto . "&datum=" . $datum . "&pos=" . $prev_pos . "\">" . "Vorheriges Bild" . "</a>\n";
+        echo "      <a class=\"back\" href=\"foto.php?hour=" . $hour . "&datum=" . $sanitized_date . "&pos=" . $pos + 1 . "\">" . "Vorheriges Bild" . "</a>\n";
     } else {
         echo "    <div class=\"center\">\n";
         echo "      <a class=\"back\">" . "Vorheriges Bild" . "</a>\n";
     }
-    if ($pos != 1) {
-        echo "      <a class=\"back\" href=\"foto.php?foto=" . $next_foto . "&datum=" . $datum . "&pos=" . $next_pos . "\">" . "N&auml;chstes Bild" . "</a><br>\n";
+    if ($next_image) {
+        echo "      <a class=\"back\" href=\"foto.php?hour=" . $hour . "&datum=" . $sanitized_date . "&pos=" . $pos - 1 . "\">" . "Nächstes Bild" . "</a><br>\n";
         echo "    </div>\n";
     } else {
-        echo "      <a class=\"back\">" . "N&auml;chstes Bild" . "</a>\n";
+        echo "      <a class=\"back\">" . "Nächstes Bild" . "</a>\n";
         echo "    </div>\n";
     }
     ?>
