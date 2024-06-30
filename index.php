@@ -4,6 +4,7 @@
 <head>
     <!-- TODO: Change href back-->
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" href="https://portal.timelapsesystems.at/favicon.ico" type="image/x-icon">
     <?php
     $cwd_path = getcwd();
     $cwd_len = strlen($cwd_path);
