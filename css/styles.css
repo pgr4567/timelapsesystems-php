@@ -35,7 +35,7 @@ body {
     flex-direction: column;
     box-sizing: border-box;
 }
-@media (min-width: 768px) {
+@media (min-width: 960px) {
     #sidebar {
         min-width: 17.5em;
         display: flex;
