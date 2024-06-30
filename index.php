@@ -64,7 +64,7 @@
         if ($bool_month[$mo]== true)
         {
           $erste_woche=true;
-          foreach ($month[$mo] as $mon)
+          foreach ($month[$mo] as $current_day)
           {
             include("kalender.php");
           }

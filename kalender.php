@@ -1,22 +1,20 @@
 <?php	
-  $time_mon = strtotime($mon);
-  $wochentag =  date("l", $time_mon);
-  $woche =  date("W", $time_mon);
-  $jahr =  date("Y", $time_mon);
-  if($erste_woche ==true)
+  $day_as_date  = strtotime($current_day);
+  $iso_week     = date("W", $day_as_date);
+  if($erste_woche == true)
   {
-    $start_monat =  date("n", $time_mon);
-    $start_woche =  date("W", $time_mon); 
+    $start_monat =  date("n", $day_as_date);
+    $start_woche =  date("W", $day_as_date); 
     if(($start_monat == 1) and ($start_woche == 52))
     {
       $start_woche=0;
     }
     $erste_woche=false;
   }
-  $num_wochentag =  date("w", $time_mon);
+  $num_wochentag =  date("w", $day_as_date);
   if($num_wochentag == 0)
   {
     $num_wochentag=7;
   }
-  $tag[$woche][$num_wochentag]=$mon;
+  $tag[$iso_week][$num_wochentag]=$current_day;
 ?>
