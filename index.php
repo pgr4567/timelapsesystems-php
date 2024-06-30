@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <!-- TODO: Change href back-->
     <link rel="stylesheet" href="./css/styles.css">
@@ -39,10 +39,7 @@
     echo "    <p>\n";
     $t=0;
     $dir_path = '.';
-    $wochentage= array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
     $dir_array = scandir($dir_path, SCANDIR_SORT_ASCENDING);
-    $num_month= array(0 ,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-    //$month = array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     $str_month = array( "test", "J&auml;nner", "Februar", "M&auml;rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");  
     $bool_month = array(false, false, false, false, false, false, false, false, false, false, false, false, false);
     for($j=29;$j>18;$j--)
@@ -55,12 +52,9 @@
           {
             if (substr($dir_entry, 3, -3)== $m)
             {
-              if($num_month[$m]==$m)
-              {	
                 $month[$m][$t] =$dir_entry;
                 $t++;
                 $bool_month[$m]=true;
-              }
             }     
           }
         }

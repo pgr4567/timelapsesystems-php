@@ -1,4 +1,4 @@
-<?php
+<?php	
   $time_mon = strtotime($mon);
   $wochentag =  date("l", $time_mon);
   $woche =  date("W", $time_mon);
@@ -18,19 +18,5 @@
   {
     $num_wochentag=7;
   }
-  for($w=1;$w<=53;$w++)
-  {
-    foreach($wochentage as $W)
-    {
-      if($woche == $w)
-      {
-        if($W == $wochentag)
-        {
-          //$substr_mon=substr ($mon, 6, 8); 
-          $tag[$w][$num_wochentag]=$mon;
-          //  echo $tag[$w][$num_wochentag];
-        }
-      }
-    }
-  }
+  $tag[$woche][$num_wochentag]=$mon;
 ?>
