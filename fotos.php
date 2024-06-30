@@ -24,7 +24,6 @@
             <div class="box_shadow">
                 <?php
                 require_once 'utils.php';
-                $dir_path = '../';
                 $UNSAFE_date = $_GET['datum'] ?? null;
                 $sanitized_date = getSafeDateFolder($UNSAFE_date);
 

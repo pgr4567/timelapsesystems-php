@@ -43,22 +43,21 @@
                 echo "    <h1 style=\"font-weight: 300 !important; margin: 0;\">Timelapse Systems - Archiv</h1>\n";
                 echo "    <h3 style=\"margin: 0; margin-top: 5px; color: #99a6ad !important; font-size: .92857rem; font-weight: 400;\">Fotoarchiv des Projektes $pro_nam - Kamera $cam_nam</h3></div>\n";
 
-                $t = 0;
-                $dir_path = '.';
-                $dir_array = scandir($dir_path, SCANDIR_SORT_ASCENDING);
+                $dir_array = scandir(__DIR__, SCANDIR_SORT_ASCENDING);
                 $str_month = array("Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
                 for ($year = 29; $year > 18; $year--) {
                     $month = array();
+                    // Get and save pictures by month
                     foreach ($dir_array as $dir_entry) {
                         if (substr($dir_entry, 0, 2) == $year) {
                             for ($m = 1; $m <= 12; $m++) {
                                 if (substr($dir_entry, 3, -3) == $m) {
-                                    $month[$m][$t] = $dir_entry;
-                                    $t++;
+                                    $month[$m][] = $dir_entry;
                                 }
                             }
                         }
                     }
+                    // Print table for each month in decending order
                     for ($mo = 12; $mo > 0; $mo--) {
                         if (array_key_exists($mo, $month)) {
                             $start_woche = null;
