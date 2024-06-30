@@ -20,16 +20,7 @@
         return;
     }
 
-    $image_paths = scandir($sanitized_date, SCANDIR_SORT_DESCENDING);
-    $image_map = array();
-    foreach ($image_paths as $image_path) {
-        if (substr($image_path, 0, 1) == '.') {
-            continue;
-        }
-        $current_hour = substr($image_path, 6, 2);
-        $image_map[$current_hour][] = $image_path;
-    }
-
+    $image_map = getImageMapOfDate($sanitized_date);
     if (key_exists($pos, $image_map[$hour])) {
         $image = $image_map[$hour][$pos];
         $min = substr($image, 9, 2);
@@ -37,6 +28,7 @@
         echo "    <h3>Ungültige GET Parameter</h3>\n";
         return;
     }
+
     $prev_image = false;
     $next_image = false;
     if (key_exists($pos - 1, $image_map[$hour])) {

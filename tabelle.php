@@ -17,7 +17,7 @@ for ($w = $start_woche; $w <= $ende_woche; $w++) {
             $str_monat = strtotime($tag[$w][$t]);
             echo "        <td>";
             if (date("n", $str_monat) == $mo) {
-                $tag_tag[$w][$t] = substr($tag[$w][$t], 6, 8);
+                $tag_tag[$w][$t] = substr($tag[$w][$t], 6, 2);
                 echo "<a href=\"fotos.php?datum=" . $tag[$w][$t] . "\">" . $tag_tag[$w][$t] . "</a>";
             } else {
                 echo "&nbsp;";
