@@ -9,15 +9,13 @@
     $cwd_path = getcwd();
     $cwd_len = strlen($cwd_path);
     # find first /
-    # TODO: change back to /
-    $cam_strt = strpos($cwd_path, '\\', 1);
+    $cam_strt = strpos($cwd_path, DIRECTORY_SEPARATOR, 1);
     # search for last /
     while ($cam_strt) {
         $cwd_mark = $cam_strt + 1;
         $pro_strt = $cwd_mark;
         # search for next /
-        # TODO: change back to /
-        $cam_strt = strpos($cwd_path, '\\', $cwd_mark);
+        $cam_strt = strpos($cwd_path, DIRECTORY_SEPARATOR, $cwd_mark);
         # if one found then cut out the part before the / as project name
         if ($cam_strt) {
             # addon: remove the project number from the pro_nam
@@ -48,23 +46,21 @@
                 $t = 0;
                 $dir_path = '.';
                 $dir_array = scandir($dir_path, SCANDIR_SORT_ASCENDING);
-                $str_month = array("test", "J&auml;nner", "Februar", "M&auml;rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
-                $bool_month = array(false, false, false, false, false, false, false, false, false, false, false, false, false);
-
+                $str_month = array("Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
                 for ($year = 29; $year > 18; $year--) {
+                    $month = array();
                     foreach ($dir_array as $dir_entry) {
                         if (substr($dir_entry, 0, 2) == $year) {
                             for ($m = 1; $m <= 12; $m++) {
                                 if (substr($dir_entry, 3, -3) == $m) {
                                     $month[$m][$t] = $dir_entry;
                                     $t++;
-                                    $bool_month[$m] = true;
                                 }
                             }
                         }
                     }
                     for ($mo = 12; $mo > 0; $mo--) {
-                        if ($bool_month[$mo] == true) {
+                        if (array_key_exists($mo, $month)) {
                             $start_woche = null;
                             foreach ($month[$mo] as $current_day) {
                                 $day_as_date   = strtotime($current_day);
@@ -74,19 +70,15 @@
                                     $num_wochentag = 7;
                                 }
                                 $tag[$iso_week][$num_wochentag] = $current_day;
-
                                 if ($start_woche == null) {
                                     $start_woche = $iso_week;
                                 }
                             }
                             $ende_woche = $iso_week;
-                            echo "    <div class=\"box_shadow\"><h4 style=\"margin: 0; margin-bottom: 10px; font-weight: 600;\">" . $str_month[$mo] . " 20" . $year . "</h4><div id=\"table_container\">";
+                            echo "    <div class=\"box_shadow\"><h4 style=\"margin: 0; margin-bottom: 10px; font-weight: 600;\">" . $str_month[$mo - 1] . " 20" . $year . "</h4><div id=\"table_container\">";
                             include("tabelle.php");
                             echo "</div></div>";
                         }
-                    }
-                    for ($m = 1; $m <= 12; $m++) {
-                        $bool_month[$m] = false;
                     }
                 }
                 unset($dir_entry);

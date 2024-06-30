@@ -1,4 +1,5 @@
 <?php
+require_once 'utils.php';
 echo "
     <table border>
       <tr>
@@ -10,23 +11,15 @@ echo "
         <th width=14%>Samstag</th>
         <th width=14%>Sonntag</th>
       </tr>\n";
+
+// Handle 53 week of last year separately
+if ($start_woche == 53) {
+    printWeek($tag, $start_woche, $mo);
+    $start_woche = 1;
+}
+
+// Loop over all weeks in current month
 for ($w = $start_woche; $w <= $ende_woche; $w++) {
-    echo "      <tr>\n";
-    for ($t = 1; $t <= 7; $t++) {
-        if (array_key_exists($t, $tag[$w])) {
-            $str_monat = strtotime($tag[$w][$t]);
-            echo "        <td>";
-            if (date("n", $str_monat) == $mo) {
-                $tag_tag[$w][$t] = substr($tag[$w][$t], 6, 2);
-                echo "<a class=\"table_link\" href=\"fotos.php?datum=" . $tag[$w][$t] . "\">" . $tag_tag[$w][$t] . "</a>";
-            } else {
-                echo "&nbsp;";
-            }
-            echo "</td>\n";
-        } else {
-            echo "        <td>&nbsp;</td>\n";
-        }
-    }
-    echo "      </tr>\n";
+    printWeek($tag, $w, $mo);
 }
 echo "    </table>\n";
