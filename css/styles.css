@@ -1,0 +1,29 @@
+img{
+    width: 70%; 
+    height: auto;    
+}
+.center{
+   display: flex; 
+    justify-content: center; 
+    align-items: center;
+   }
+summary{
+ text-indent: 15%;
+  padding: 4px;
+  width: 150px;
+  background-color: #eeeeee;
+  border: none;
+  box-shadow: 2px 2px 3px #bbbbbb;
+  cursor: pointer;
+}
+.details{
+  background-color: #eeeeee;
+  padding: 4px;
+  margin-left: 33px;
+  box-shadow: 2px 2px 3px #bbbbbb;
+}
+.back{
+  background-color: #eeeeee;
+  padding: 4px;
+  box-shadow: 2px 2px 3px #bbbbbb;
+}
