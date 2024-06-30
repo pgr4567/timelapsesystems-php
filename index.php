@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- TODO: Change href back-->
     <link rel="stylesheet" href="./css/styles.css">
 <?php
     $cwd_path = getcwd();
     $cwd_len = strlen ($cwd_path);
     # find first /
+    # TODO: change back to /
     $cam_strt = strpos ($cwd_path, '\\', 1);
     # search for last /
     while ($cam_strt)
@@ -13,6 +15,7 @@
       $cwd_mark = $cam_strt + 1;
       $pro_strt = $cwd_mark;
       # search for next /
+      # TODO: change back to /
       $cam_strt = strpos ($cwd_path, '\\', $cwd_mark);
       # if one found then cut out the part before the / as project name
       if ($cam_strt)
