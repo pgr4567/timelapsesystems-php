@@ -41,9 +41,9 @@
     $dir_array = scandir($dir_path, SCANDIR_SORT_ASCENDING);
     $str_month = array("test", "J&auml;nner", "Februar", "M&auml;rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
     $bool_month = array(false, false, false, false, false, false, false, false, false, false, false, false, false);
-    for ($j = 29; $j > 18; $j--) {
+    for ($year = 29; $year > 18; $year--) {
         foreach ($dir_array as $dir_entry) {
-            if (substr($dir_entry, 0, 2) == $j) {
+            if (substr($dir_entry, 0, 2) == $year) {
                 for ($m = 1; $m <= 12; $m++) {
                     if (substr($dir_entry, 3, -3) == $m) {
                         $month[$m][$t] = $dir_entry;
@@ -55,13 +55,19 @@
         }
         for ($mo = 12; $mo > 0; $mo--) {
             if ($bool_month[$mo] == true) {
+                $start_woche = null;
                 foreach ($month[$mo] as $current_day) {
                     $day_as_date   = strtotime($current_day);
                     $iso_week      = date("W", $day_as_date);
                     $num_wochentag = date("w", $day_as_date);
                     $tag[$iso_week][$num_wochentag] = $current_day;
+
+                    if ($start_woche == null) {
+                        $start_woche = $iso_week;
+                    }
                 }
-                echo "    <h4>" . $str_month[$mo] . " " . $jahr . "</h4>";
+                $ende_woche = $iso_week;
+                echo "    <h4>" . $str_month[$mo] . " 20" . $year . "</h4>";
                 include("tabelle.php");
             }
         }
