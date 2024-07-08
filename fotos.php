@@ -37,7 +37,7 @@
                 $image_map = getImageMapOfDate($sanitized_date);
                 foreach ($image_map as $hour => $images) {
                     echo "    <div class=\"box_shadow\">\n";
-                    echo "      <p style=\"margin: 0; text-align: center; font-weight: 600; font-size: 1rem;\">Stunde&nbsp;" . $hour . "</p><div class=\"image_grid\">\n";
+                    echo "      <p style=\"margin: 0; text-align: center; font-weight: 600; font-size: 1.3rem;\">Stunde&nbsp;" . $hour . "</p><div class=\"image_grid\">\n";
                     foreach ($images as $index => $image) {
                         $minute = substr($image, 9, 2);
                         echo "        <a class=\"image_link\" href=\"foto.php?datum=" . $sanitized_date . "&hour=" . $hour . "&pos=" . $index . "\"><div class=\"image_subtext\"><img src=\"" . $sanitized_date . DIRECTORY_SEPARATOR . $image . "\"/><span>" . $hour . ":" . $minute . "</span></div></a>\n";

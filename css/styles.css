@@ -11,6 +11,7 @@ img{
 
 .back {
     color: #58666e;
+    font-size: 1.1rem;
 }
 
 body {
@@ -83,13 +84,13 @@ th {
     color: #58666e;
     font-weight: 600;
     padding: .55rem;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     text-align: center;
 }
 
 td {
     padding: .55rem;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     text-align: center;
 }
 
@@ -131,6 +132,7 @@ td {
     text-align: center;
     justify-content: center;
     align-items: center;
+    font-size: 1.2rem;
 }
 
 .image_link {
