@@ -24,6 +24,7 @@
             <div class="box_shadow" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
                 <?php
                 require_once 'utils.php';
+                require_once 'thumbnail.php';
                 $UNSAFE_date = $_GET['datum'] ?? null;
                 $sanitized_date = getSafeDateFolder($UNSAFE_date);
 
@@ -49,7 +50,7 @@
                 foreach ($images as $index => $image) {
                     $minute = substr($image, 9, 2);
                     echo " <a class=\"image_link\" href=\"foto.php?datum=" . $sanitized_date . "&hour=" . $hour . "&pos=" . $index . " \">
-                        <div class=\"image_subtext\"><img src=\"" . $sanitized_date . DIRECTORY_SEPARATOR . $image . "\" /><span>" . $hour . ":" . $minute . "</span></div>
+                        <div class=\"image_subtext\"><img src=\"" . thumbnail($sanitized_date . DIRECTORY_SEPARATOR . $image) . "\" /><span>" . $hour . ":" . $minute . "</span></div>
                     </a>\n";
                 }
                 echo " </div>
