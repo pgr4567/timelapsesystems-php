@@ -1,0 +1,24 @@
+<script>
+    function adjustTableHeaders() {
+        var tables = document.querySelectorAll('.calendar-table');
+        var fullNames = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
+        var shortNames = ["M", "D", "M", "D", "F", "S", "S"];
+
+        tables.forEach(function (table) {
+            var headers = table.querySelectorAll('th');
+
+            if (window.innerWidth < 1100) {
+                headers.forEach(function (header, index) {
+                    header.textContent = shortNames[index];
+                });
+            } else {
+                headers.forEach(function (header, index) {
+                    header.textContent = fullNames[index];
+                });
+            }
+        });
+    }
+
+    window.addEventListener('resize', adjustTableHeaders);
+    window.addEventListener('load', adjustTableHeaders);
+</script>

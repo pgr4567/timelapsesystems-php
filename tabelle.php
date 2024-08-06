@@ -1,15 +1,15 @@
 <?php
 require_once 'utils.php';
 echo "
-    <table border>
+    <table border class=\"calendar-table\">
       <tr>
-        <th width=14%>Montag</th>
-        <th width=14%>Dienstag</th>
-        <th width=14%>Mittwoch</th>
-        <th width=14%>Donnerstag</th>
-        <th width=14%>Freitag</th>
-        <th width=14%>Samstag</th>
-        <th width=14%>Sonntag</th>
+        <th>Montag</th>
+        <th>Dienstag</th>
+        <th>Mittwoch</th>
+        <th>Donnerstag</th>
+        <th>Freitag</th>
+        <th>Samstag</th>
+        <th>Sonntag</th>
       </tr>\n";
 
 // Handle 53th week of last year separately

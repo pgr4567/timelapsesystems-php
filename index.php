@@ -29,9 +29,13 @@
     $cam_nam = substr($cwd_path, $cwd_mark, $cwd_len - $cwd_mark);
 
     echo "    <title>timelapsesystems - $pro_nam</title>\n";
-    echo "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-15\">\n";
+    echo "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-15\"/>\n";
+    echo "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n";
     echo "  </head>\n";
     echo "  <body>\n";
+    ?>
+    <?php
+    require 'resizeHandler.html';
     ?>
     <div id="container">
         <?php
@@ -74,7 +78,7 @@
                                 }
                             }
                             $ende_woche = $iso_week;
-                            echo "    <div class=\"box_shadow\"><h4 style=\"margin: 0; margin-bottom: 10px; font-weight: 600;\">" . $str_month[$mo - 1] . " 20" . $year . "</h4><div id=\"table_container\">";
+                            echo "    <div class=\"box_shadow\"><h4 style=\"font-size: 1.4rem; margin: 0; margin-bottom: 10px; font-weight: 600;\">" . $str_month[$mo - 1] . " 20" . $year . "</h4><div id=\"table_container\">";
                             include("tabelle.php");
                             echo "</div></div>";
                         }
