@@ -19,7 +19,7 @@
             timeline.style.transition = instant ? 'transform 0s ease-in-out' : 'transform 0.3s ease-in-out';
             timeline.style.transform = `translateX(${offset}px)`;
 
-            const time = items[currentIndex].getElementsByTagName('img')[0].src.slice(-15).substring(0, 5).replace("-", ":");
+            const time = items[currentIndex].getElementsByTagName('img')[0].getAttribute("data-src").slice(-15).substring(0, 5).replace("-", ":");
             timer.innerText = time;
         }
 
