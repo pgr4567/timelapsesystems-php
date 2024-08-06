@@ -1,6 +1,8 @@
 # PHP Archivsystem
 
 ## Development
+Die letzte Version des Archivs verwendet automatisch generierte thumbnails, um die Download-Menge in der Übersicht von 11MB auf ~ 4MB zu beschränken.
+Dafür wird die Standard-Erweiterung `gd` benötigt. Diese kann im `php.ini` file aktiviert werden.
 Um das System lokal zu testen, kann ein lokaler PHP development server geöffnet werden.
 
 ```sh
