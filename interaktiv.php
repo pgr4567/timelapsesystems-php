@@ -11,8 +11,7 @@
 <body>
     <?php
     require 'scrollFoto.html';
-    ?>
-    <?php
+    require 'lazysizes.html';
     require_once 'utils.php';
     $UNSAFE_date = $_GET['datum'] ?? null;
     $sanitized_date = getSafeDateFolder($UNSAFE_date);
@@ -49,7 +48,7 @@
                         $image_map = getImageMapOfDate($sanitized_date);
                         foreach (array_reverse($image_map) as $hour => $images) {
                             foreach (array_reverse($images) as $index => $image) {
-                                echo "<div class='timeline-item'><img src=\"" . $sanitized_date . DIRECTORY_SEPARATOR . $image . "\" alt='Timeline Image'></div>";
+                                echo "<div class='timeline-item'><img style=\"object-fit: cover;\" class=\"lazyload\" data-src=\"" . $sanitized_date . DIRECTORY_SEPARATOR . $image . "\" alt='Timeline Image'></div>";
                             }
                         }
                         ?>

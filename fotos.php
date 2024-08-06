@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <?php
+    require 'lazysizes.html';
+    ?>
     <div id="container">
         <?php
         require 'sidebar.html';
@@ -50,7 +53,7 @@
                 foreach ($images as $index => $image) {
                     $minute = substr($image, 9, 2);
                     echo " <a class=\"image_link\" href=\"foto.php?datum=" . $sanitized_date . "&hour=" . $hour . "&pos=" . $index . " \">
-                        <div class=\"image_subtext\"><img src=\"" . thumbnail($sanitized_date . DIRECTORY_SEPARATOR . $image) . "\" /><span>" . $hour . ":" . $minute . "</span></div>
+                        <div class=\"image_subtext\"><img class=\"lazyload\" data-src=\"" . thumbnail($sanitized_date . DIRECTORY_SEPARATOR . $image) . "\" /><span>" . $hour . ":" . $minute . "</span></div>
                     </a>\n";
                 }
                 echo " </div>
