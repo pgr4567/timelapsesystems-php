@@ -6,8 +6,8 @@
         const timer = document.getElementById('timeline-timer');
         const totalItems = items.length;
         slider.max = totalItems - 1;
-        slider.addEventListener('input', (value) => {
-            currentIndex = parseInt(value.target.value);
+        slider.addEventListener('input', (event) => {
+            currentIndex = parseInt(event.target.value);
             updateSlider();
         });
 
@@ -25,12 +25,12 @@
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' && currentIndex < totalItems - 1) {
-                currentIndex = (currentIndex + 1) % items.length;
                 slider.value = currentIndex;
+                currentIndex = (currentIndex + 1) % items.length;
                 updateSlider();
             } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
-                currentIndex = (currentIndex - 1 + items.length) % items.length;
                 slider.value = currentIndex;
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
                 updateSlider();
             }
         });
