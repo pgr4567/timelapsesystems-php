@@ -1,0 +1,39 @@
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const timeline = document.querySelector('.timeline');
+        const items = document.querySelectorAll('.timeline-item');
+        const slider = document.getElementById('timeline-slider');
+        const timer = document.getElementById('timeline-timer');
+        const totalItems = items.length;
+        slider.max = totalItems - 1;
+        slider.addEventListener('input', (value) => {
+            currentIndex = parseInt(value.target.value);
+            updateSlider();
+        });
+
+        let currentIndex = 0;
+        function updateSlider() {
+            const width = timeline.offsetWidth;
+            const offset = -currentIndex * width;
+            timeline.style.transform = `translateX(${offset}px)`;
+
+            const time = items[currentIndex].getElementsByTagName('img')[0].src.slice(-15).substring(0, 5).replace("-", ":");
+            timer.innerText = time;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentIndex < totalItems - 1) {
+                currentIndex = (currentIndex + 1) % items.length;
+                slider.value = currentIndex;
+                updateSlider();
+            } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                slider.value = currentIndex;
+                updateSlider();
+            }
+        });
+
+        updateSlider();
+    });
+
+</script>

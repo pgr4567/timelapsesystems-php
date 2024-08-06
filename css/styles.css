@@ -148,3 +148,127 @@ td {
     color: #58666e;
     font-weight: 400;
 }
+
+.timeline-wrapper {
+    width: 80%;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeline {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.timeline-item {
+    min-width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.timeline-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+#timeline-slider {
+    margin-top: 1rem;
+    margin-bottom: 0.6rem;
+    width: 80%;
+}
+
+#button-interactive {
+    position: relative;
+    background: linear-gradient(157deg, rgba(21,55,31,1) 0%, rgba(53,154,80,1) 35%, rgba(60,217,104,1) 100%);
+    overflow: hidden;
+    transition: background 0.3s ease-in-out;
+}
+#button-interactive::before {
+    z-index: 0;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(28,71,40,1) 0%, rgba(49,122,69,1) 35%, rgba(70,173,99,1) 100%);
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0.8;
+}
+
+#button-interactive:hover::before {
+    opacity: 0;
+}
+
+#button-interactive span {
+    position: relative;
+    z-index: 2;
+}
+
+/*********** Baseline, reset styles ***********/
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 25rem;
+  }
+  
+  /* Removes default focus */
+  input[type="range"]:focus {
+    outline: none;
+  }
+  
+  /******** Chrome, Safari, Opera and Edge Chromium styles ********/
+  /* slider track */
+  input[type="range"]::-webkit-slider-runnable-track {
+    background-color: #3f4b44;
+    border-radius: 1rem;
+    height: 1rem;
+    opacity: 0.8;
+  }
+  
+  /* slider thumb */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -4px; /* Centers thumb on the track */
+    background-color: #009b3d;
+    border-radius: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  
+  input[type="range"]:focus::-webkit-slider-thumb {
+    outline: 3px solid #009b3d;
+    outline-offset: 0.125rem;
+  }
+  
+  /*********** Firefox styles ***********/
+  /* slider track */
+  input[type="range"]::-moz-range-track {
+    background-color: #3f4b44;
+    border-radius: 1rem;
+    height: 1rem;
+    opacity: 0.8;
+  }
+  
+  /* slider thumb */
+  input[type="range"]::-moz-range-thumb {
+    background-color: #009b3d;
+    border: none; /*Removes extra border that FF applies*/
+    border-radius: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  
+  input[type="range"]:focus::-moz-range-thumb{
+    outline: 3px solid #009b3d;
+    outline-offset: 0.125rem;
+  }
