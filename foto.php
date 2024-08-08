@@ -2,8 +2,7 @@
 <html lang="en">
 
 <head>
-    <!-- TODO: Change href back-->
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="../../cam000/css/styles.css">
     <link rel="icon" href="https://portal.timelapsesystems.at/favicon.ico" type="image/x-icon">
     <title>timelapsesystems - Foto-Übersicht</title>
 </head>
