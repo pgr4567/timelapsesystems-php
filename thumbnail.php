@@ -12,7 +12,7 @@ function thumbnail($imgfile, $outdir = "./thumbnails/")
     $filename = str_replace($replace, "_", dirname($imgfile)) . "_" . $filename;
 
     if (!is_dir($outdir))
-        return false;
+        mkdir($outdir, 0777, true);
 
     if (file_exists($outdir . $filename))
         return $outdir . $filename;

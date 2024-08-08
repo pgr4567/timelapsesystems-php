@@ -5,6 +5,7 @@
         const slider = document.getElementById('timeline-slider');
         const timer = document.getElementById('timeline-timer');
         const totalItems = items.length;
+
         slider.max = totalItems - 1;
         slider.addEventListener('input', (event) => {
             currentIndex = parseInt(event.target.value);
