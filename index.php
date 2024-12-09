@@ -50,6 +50,7 @@
                 $str_month = array("Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
                 for ($year = 29; $year > 18; $year--) {
                     $month = array();
+                    $tag = array();
                     // Get and save pictures by month
                     foreach ($dir_array as $dir_entry) {
                         if (substr($dir_entry, 0, 2) == $year) {

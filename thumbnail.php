@@ -7,14 +7,16 @@ function thumbnail($imgfile, $outdir = "./thumbnails/")
 
     $filename = basename($imgfile);
 
+    $absoluteOutDir = getcwd() . DIRECTORY_SEPARATOR . $outdir;
+
     // Add folder path to image name
     $replace = array("/", "\\", ".");
     $filename = str_replace($replace, "_", dirname($imgfile)) . "_" . $filename;
 
-    if (!is_dir($outdir))
-        mkdir($outdir, 0777, true);
+    if (!is_dir($absoluteOutDir))
+        mkdir($absoluteOutDir, 0777, true);
 
-    if (file_exists($outdir . $filename))
+    if (file_exists($absoluteOutDir . $filename))
         return $outdir . $filename;
 
     if (!file_exists($imgfile))
@@ -33,14 +35,14 @@ function thumbnail($imgfile, $outdir = "./thumbnails/")
 
     $thumb = imagecreate($newwidth, $newheight);
 
-    imageJPEG($thumb, $outdir . "temp.jpg");
-    $thumb = imagecreatefromjpeg($outdir . "temp.jpg");
+    imageJPEG($thumb, $absoluteOutDir . "temp.jpg");
+    $thumb = imagecreatefromjpeg($absoluteOutDir . "temp.jpg");
 
     $source = imagecreatefromjpeg($imgfile);
 
     imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
-    imagejpeg($thumb, $outdir . $filename, 80);
+    imagejpeg($thumb, $absoluteOutDir . $filename, 80);
 
     ImageDestroy($thumb);
     ImageDestroy($source);
